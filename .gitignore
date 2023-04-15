@@ -1,23 +1,84 @@
-# Compiled class file
-*.class
+/**
+ * - Name: Daniel De
+ * - File: Stock Selector
+ * - Description: Program to help investors select a stock
+ * based on certain criteria
+ */
 
-# Log file
-*.log
+import java.util.Scanner;
 
-# BlueJ files
-*.ctxt
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+public class StockSelector 
+{
+	public static void main(String[] args) 
+	{
+		
+		Scanner input = new Scanner(System.in);
+		
+		double moneyToInvest;
+		String tickerInitials;
+		int initialsLength;
+		final int INITIALS_LENGTH_MAX = 6;
+		double stockPrice;
+		final int STOCK_PRICE_MIN = 5;
+		double priceToEarningsRatio;
+		final int OVER_VALUED_RATIO = 75;
+		int sharesBuyable;
+		
+		System.out.println("Welcome to the Stock Selector App!");
+		System.out.println();
+// Ask user to enter amount to invest
+		System.out.print("Enter the total amount of money " +
+		"you are willing to invest: $");
+		moneyToInvest = input.nextDouble();
+		input.nextLine(); // to consume end of line character
+		
+// Ask user to input stock ticker
+		System.out.println("Enter the stock ticker:"); 
+		tickerInitials = input.nextLine();
+		initialsLength = tickerInitials.length();
+		// Check input value
+		if (initialsLength >= INITIALS_LENGTH_MAX) 
+		{
+			System.out.println("Invalid input. Try again.");
+			System.out.print("Enter the stock ticker: ");
+			tickerInitials = input.nextLine();
+		}
+		  
+// Ask user to enter stock price
+		System.out.print("Enter the price: ");
+		stockPrice = input.nextDouble();
+		// Check input value
+		if (stockPrice < STOCK_PRICE_MIN) 
+		{
+			System.out.println("Invalid Price entered for stock. Try again.");
+			System.out.println("Enter the price");
+			stockPrice = input.nextDouble();
+		}
+		
+// Ask user for P/E ratio
+		System.out.print("Enter the P/E ratio: ");
+		priceToEarningsRatio = input.nextDouble();
+		
+		
+		
+// Display ticker, stock price,
+// price-to-earnings ratio, and the number of shares available
+// to purchase based on available funds.
+	System.out.println();
+	System.out.println("Below are your results: ");
+	System.out.println();
+	System.out.println("Stock: "+ tickerInitials);
+	System.out.println("Price: $" + stockPrice);
+	System.out.println("P/E Ratio: " + priceToEarningsRatio);
+	// Overvalued stock checker
+			if(priceToEarningsRatio > OVER_VALUED_RATIO) 
+			{
+				System.out.println("This stock may be overvalued. "
+						+ "Proceed with caution!");
+			}
+	System.out.println("Number of shares able to purchase: "
+			+ moneyToInvest/stockPrice );
+	}
 
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+}
